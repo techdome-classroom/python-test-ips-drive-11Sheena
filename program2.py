@@ -1,13 +1,21 @@
 def longest_substring(s: str) -> int:
-    
-    """"
-    
-    Implement the function longest_substring 
-    using the provided longest_substring function to find 
-    the length of the longest substring without repeating characters.
+    if not s:
+        return 0
 
-    """ 
-    pass
+    max_length = 0
+    left = 0
+    char_index = {}
+
+    for right, char in enumerate(s):
+        if char in char_index and char_index[char] >= left:
+            left = char_index[char] + 1
+
+        char_index[char] = right
+        max_length = max(max_length, right - left + 1)
+
+    return max_length
 
 
+s = "abcabcbb"
+print(longest_substring(s))  # Output: 3
 
